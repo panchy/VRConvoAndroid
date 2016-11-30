@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.intro.activity.IntroActivity;
+import com.keensense.vrconvo.apps.profile.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.model.LoginResponse;
 import com.keensense.vrconvo.model.Response;
@@ -67,6 +68,25 @@ public class LoginFragment extends Fragment {
         return v;
     }
 
+    private boolean isValidInput()
+    {
+        String username = mUsername.getText().toString();
+        String password = mPassword.getText().toString();
+        boolean toReturn = true;
+        if(username.length()==0)
+        {
+            mUsername.setError("Don't leave this field empty!");
+            toReturn=false;
+        }
+        if(password.length()==0)
+        {
+            mPassword.setError("Don't leave this field empty!");
+            toReturn=false;
+        }
+
+        return toReturn;
+    }
+
     private void initListeners() {
 
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
@@ -74,22 +94,26 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 String username = mUsername.getText().toString();
                 String password = mPassword.getText().toString();
-                mConvoHelper.setCredentials(username, password);
-                mConvoHelper.login(new Callback<Response<LoginResponse>>() {
-                    @Override
-                    public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
-                        if (response.body().getMessage().equals("OK!")) {
-                            mListenerObject.onMessageReceived("logged-in");
-                        } else {
-                            Snackbar.make(mLayout,response.body().getMessage(),2000).show();
+                if(isValidInput())
+                {
+                    mConvoHelper.setCredentials(username, password);
+                    mConvoHelper.login(new Callback<Response<LoginResponse>>() {
+                        @Override
+                        public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
+                            if (response.body().getMessage().equals("OK!")) {
+                                ProfileActivity.USER_INFO=response.body().getData();
+                                mListenerObject.onMessageReceived("logged-in");
+                            } else {
+                                Snackbar.make(mLayout,response.body().getMessage(),2000).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 

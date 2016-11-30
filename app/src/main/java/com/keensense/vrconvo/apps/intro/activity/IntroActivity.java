@@ -3,6 +3,7 @@ package com.keensense.vrconvo.apps.intro.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import com.keensense.vrconvo.App;
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.intro.fragment.LoginFragment;
 import com.keensense.vrconvo.apps.intro.fragment.RegisterFragment;
+import com.keensense.vrconvo.apps.profile.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.model.LoginResponse;
 import com.keensense.vrconvo.model.Response;
@@ -43,6 +45,7 @@ public class IntroActivity extends AppCompatActivity implements FragmentListener
             @Override
             public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
                 if (response.body().getMessage().equals("OK!")) {
+                    ProfileActivity.USER_INFO=response.body().getData();
                     loginSuccessful();
                 }
             }
@@ -94,8 +97,9 @@ public class IntroActivity extends AppCompatActivity implements FragmentListener
     }
 
     private void loginSuccessful() {
-
-
+        Intent profile = new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(profile);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
     }
 
