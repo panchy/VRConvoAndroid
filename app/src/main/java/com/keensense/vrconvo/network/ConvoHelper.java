@@ -3,9 +3,13 @@ package com.keensense.vrconvo.network;
 import android.util.Log;
 
 import com.keensense.vrconvo.App;
+import com.keensense.vrconvo.model.Character;
 import com.keensense.vrconvo.model.LoginResponse;
 import com.keensense.vrconvo.model.Response;
+import com.keensense.vrconvo.model.Room;
 import com.keensense.vrconvo.model.UserInfo;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -139,7 +143,7 @@ public class ConvoHelper {
 
     }
 
-    public void updateDeviceId(final Callback<Response<LoginResponse>> customCallback) {
+    public void bindDeviceId(final Callback<Response<LoginResponse>> customCallback) {
         ConvoClient.getRetrofitInstance().updateDeviceId("update_device_id", username, password, App.DEVICE_ID).enqueue(new Callback<Response<LoginResponse>>() {
             @Override
             public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
@@ -162,5 +166,107 @@ public class ConvoHelper {
                 }
             }
         });
+    }
+
+    public void unbindDeviceId(final Callback<Response<LoginResponse>> customCallback) {
+        ConvoClient.getRetrofitInstance().updateDeviceId("unbind_device_id", username, password, "").enqueue(new Callback<Response<LoginResponse>>() {
+            @Override
+            public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+    }
+
+    public void getAllCharacters(final Callback<Response<List<Character>>> customCallback) {
+        ConvoClient.getRetrofitInstance().getAllCharacters("get_all_characters").enqueue(new Callback<Response<List<Character>>>() {
+            @Override
+            public void onResponse(Call<Response<List<Character>>> call, retrofit2.Response<Response<List<Character>>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<Character>>> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+    }
+
+    public void getAllRooms(final Callback<Response<List<Room>>> customCallback) {
+        ConvoClient.getRetrofitInstance().getAllRooms("get_all_rooms").enqueue(new Callback<Response<List<Room>>>() {
+            @Override
+            public void onResponse(Call<Response<List<Room>>> call, retrofit2.Response<Response<List<Room>>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<Room>>> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+    }
+
+    public void changePassword(String newPassword,final Callback<Response<LoginResponse>> customCallback) {
+
+        ConvoClient.getRetrofitInstance().changePassword("change_password", username, password,newPassword).enqueue(new Callback<Response<LoginResponse>>() {
+            @Override
+            public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+
     }
 }

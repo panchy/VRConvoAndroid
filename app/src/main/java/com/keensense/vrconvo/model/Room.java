@@ -28,4 +28,39 @@ public class Room
     public String getImage() { return this.image; }
 
     public void setImage(String image) { this.image = image; }
+
+    private boolean isLocked;
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+
+    public String getRoom_name() {
+
+        return room_name;
+    }
+
+    public void setRoom_name(String room_name) {
+        this.room_name = room_name;
+    }
+
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Room){
+            Room toCompare = (Room) o;
+            return this.id==(toCompare.id);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
 }

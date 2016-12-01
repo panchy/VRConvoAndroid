@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.intro.activity.IntroActivity;
-import com.keensense.vrconvo.apps.profile.ProfileActivity;
+import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.model.LoginResponse;
 import com.keensense.vrconvo.model.Response;
@@ -57,14 +57,13 @@ public class RegisterFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private static Fragment fragment=null;
+    private static Fragment fragment = null;
 
     public static RegisterFragment newInstance() {
-        if(fragment == null)
-        {
+        if (fragment == null) {
             fragment = new RegisterFragment();
         }
-        return (RegisterFragment)fragment;
+        return (RegisterFragment) fragment;
     }
 
     private void initListeners() {
@@ -79,25 +78,46 @@ public class RegisterFragment extends Fragment {
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isValidInput())
-                {
-                    String username = mUsername.getText().toString();
-                    String password = mPassword.getText().toString();
-                    mConvoHelper.setCredentials(username,password);
+                if (isValidInput()) {
+                    mListenerObject.onMessageReceived("hide-gui");
+                    final String username = mUsername.getText().toString();
+                    final String password = mPassword.getText().toString();
+                    mConvoHelper.setCredentials(username, password);
                     mConvoHelper.register(new Callback<Response<LoginResponse>>() {
                         @Override
                         public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
                             if (response.body().getMessage().equals("OK!")) {
-                                ProfileActivity.USER_INFO=response.body().getData();
-                                mListenerObject.onMessageReceived("logged-in");
+
+                                mConvoHelper.login(new Callback<Response<LoginResponse>>() {
+                                    @Override
+                                    public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
+                                        if (response.body().getMessage().equals("OK!")) {
+                                            ProfileActivity.USER_INFO = response.body().getData();
+                                            mListenerObject.onMessageReceived("logged-in");
+                                        } else {
+                                            mListenerObject.onMessageReceived("show-gui");
+                                            Snackbar.make(mLayout, response.body().getMessage(), 2000).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
+
+                                        mListenerObject.onMessageReceived("show-gui");
+
+                                    }
+                                });
+
                             } else {
-                                Snackbar.make(mLayout,response.body().getMessage(),2000).show();
+                                mListenerObject.onMessageReceived("show-gui");
+                                Snackbar.make(mLayout, response.body().getMessage(), 2000).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
-
+                            mListenerObject.onMessageReceived("show-gui");
                         }
                     });
 
@@ -112,7 +132,7 @@ public class RegisterFragment extends Fragment {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence,int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
@@ -125,31 +145,26 @@ public class RegisterFragment extends Fragment {
 
     }
 
-    private boolean isValidInput()
-    {
+    private boolean isValidInput() {
         String username = mUsername.getText().toString();
         String password = mPassword.getText().toString();
         String passwordRepeat = mPasswordRepeat.getText().toString();
         boolean toReturn = true;
-        if(username.length()==0)
-        {
+        if (username.length() == 0) {
             mUsername.setError("Don't leave this field empty!");
-            toReturn=false;
+            toReturn = false;
         }
-        if(password.length()==0)
-        {
+        if (password.length() == 0) {
             mPassword.setError("Don't leave this field empty!");
-            toReturn=false;
+            toReturn = false;
         }
-        if(passwordRepeat.length()==0)
-        {
+        if (passwordRepeat.length() == 0) {
             mPasswordRepeat.setError("Don't leave this field empty!");
-            toReturn=false;
+            toReturn = false;
         }
-        if((passwordRepeat.length()>0&&password.length()>0)&&(!password.equals(passwordRepeat)))
-        {
+        if ((passwordRepeat.length() > 0 && password.length() > 0) && (!password.equals(passwordRepeat))) {
             mPasswordRepeat.setError("Passwords don't match!");
-            toReturn=false;
+            toReturn = false;
         }
 
         return toReturn;
@@ -160,24 +175,20 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(LayoutId, container, false);
-        ButterKnife.bind(this,v);
+        ButterKnife.bind(this, v);
         mConvoHelper = new ConvoHelper();
         initListeners();
-        return  v;
+        return v;
     }
 
-    private void checkUsername()
-    {
-        mConvoHelper.setCredentials(mUsername.getText().toString(),mPassword.getText().toString());
+    private void checkUsername() {
+        mConvoHelper.setCredentials(mUsername.getText().toString(), mPassword.getText().toString());
         mConvoHelper.checkUser(new Callback<Response<UserInfo>>() {
             @Override
             public void onResponse(Call<Response<UserInfo>> call, retrofit2.Response<Response<UserInfo>> response) {
-                if(response.body().getMessage().equals("OK!"))
-                {
+                if (response.body().getMessage().equals("OK!")) {
                     mUsername.setTextColor(Color.GREEN);
-                }
-                else
-                {
+                } else {
                     mUsername.setTextColor(Color.RED);
                 }
             }

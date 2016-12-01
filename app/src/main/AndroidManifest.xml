@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.keensense.vrconvo">
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:launchMode="singleTask"
             android:name=".apps.intro.activity.IntroActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionbar">
@@ -22,7 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".apps.profile.ProfileActivity"></activity>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".apps.profile.activity.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionbar" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".widget.FullscreenImageViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionbar" />
     </application>
 
 </manifest>

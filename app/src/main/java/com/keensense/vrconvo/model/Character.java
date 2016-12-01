@@ -28,4 +28,38 @@ public class Character
     public String getImage() { return this.image; }
 
     public void setImage(String image) { this.image = image; }
+
+    private boolean isLocked;
+
+    public String getCharacter_name() {
+        return character_name;
+    }
+
+    public void setCharacter_name(String character_name) {
+        this.character_name = character_name;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Character){
+            Character toCompare = (Character) o;
+            return this.id==(toCompare.id);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
 }

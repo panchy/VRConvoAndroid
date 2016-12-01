@@ -14,7 +14,7 @@ public class App extends Application {
 
     public static String DEVICE_ID;
 
-    public static String[] PERMISSIONS =  {Manifest.permission.INTERNET,Manifest.permission.READ_PHONE_STATE};
+    public static String[] PERMISSIONS =  {Manifest.permission.INTERNET};
 
     private static Context appContext = null;
 

@@ -7,4 +7,13 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="repeat_password">Repeat Password</string>
+    <string name="rooms">Rooms</string>
+    <string name="characters">Characters</string>
+    <string name="convo_coins_cc">Convo Coins:</string>
+    <string name="repeatnewpass">Repeat New Password</string>
+    <string name="currentpassword">Current Password</string>
+    <string name="launching_vr_convo_manager">Launching VR Convo Manager...</string>
+    <string name="please_wait_a_bit">Please wait a bit...</string>
+    <string name="passhaschanged">Password has changed.</string>
+    <string name="deviceisnotrelatedanymore">Device is not related to this account anymore.</string>
 </resources>

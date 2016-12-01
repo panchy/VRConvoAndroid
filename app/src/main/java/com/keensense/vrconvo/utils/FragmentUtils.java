@@ -20,20 +20,26 @@ public class FragmentUtils {
         this.activity = _activity;
     }
 
-    public void setFragment(int layoutid) {
+    public void setFragment(int layoutid,boolean withAnim) {
 
         if(activity.getSupportFragmentManager().getFragments()!=null)
         {
-            for(Fragment frag:activity.getSupportFragmentManager().getFragments()){
-                Log.e("FragmentUtils","A fragment was removed.");
-                activity.getSupportFragmentManager().beginTransaction().remove(frag).commit();
-            }
+            fragTrans = activity.getSupportFragmentManager().beginTransaction();
+            if(withAnim)
+            fragTrans.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+            fragTrans.replace(layoutid, fragmentToAdd);
+            fragTrans.commitAllowingStateLoss();
+        }
+        else
+        {
+            fragTrans = activity.getSupportFragmentManager().beginTransaction();
+            if(withAnim)
+            fragTrans.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+            fragTrans.add(layoutid, fragmentToAdd);
+            fragTrans.commitAllowingStateLoss();
         }
 
-        fragTrans = activity.getSupportFragmentManager().beginTransaction();
-        fragTrans.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragTrans.add(layoutid, fragmentToAdd);
-        fragTrans.commit();
+
 
     }
 

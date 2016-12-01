@@ -1,8 +1,12 @@
 package com.keensense.vrconvo.network;
 
+import com.keensense.vrconvo.model.Character;
 import com.keensense.vrconvo.model.LoginResponse;
 import com.keensense.vrconvo.model.Response;
+import com.keensense.vrconvo.model.Room;
 import com.keensense.vrconvo.model.UserInfo;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -34,5 +38,18 @@ public interface ConvoService {
     @FormUrlEncoded
     @POST("service")
     Call<Response<UserInfo>> checkUser(@Field("action") String action, @Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<List<Character>>> getAllCharacters(@Field("action") String action);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<List<Room>>> getAllRooms(@Field("action") String action);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<LoginResponse>> changePassword(@Field("action") String action,@Field("username") String username,@Field("password") String password,@Field("new_password") String newPassword);
+
 
 }

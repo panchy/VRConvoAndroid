@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.intro.activity.IntroActivity;
-import com.keensense.vrconvo.apps.profile.ProfileActivity;
+import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.model.LoginResponse;
 import com.keensense.vrconvo.model.Response;
@@ -47,14 +47,13 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private static Fragment fragment=null;
+    private static Fragment fragment = null;
 
     public static LoginFragment newInstance() {
-        if(fragment == null)
-        {
+        if (fragment == null) {
             fragment = new LoginFragment();
         }
-        return (LoginFragment)fragment;
+        return (LoginFragment) fragment;
     }
 
     @Override
@@ -68,20 +67,17 @@ public class LoginFragment extends Fragment {
         return v;
     }
 
-    private boolean isValidInput()
-    {
+    private boolean isValidInput() {
         String username = mUsername.getText().toString();
         String password = mPassword.getText().toString();
         boolean toReturn = true;
-        if(username.length()==0)
-        {
+        if (username.length() == 0) {
             mUsername.setError("Don't leave this field empty!");
-            toReturn=false;
+            toReturn = false;
         }
-        if(password.length()==0)
-        {
+        if (password.length() == 0) {
             mPassword.setError("Don't leave this field empty!");
-            toReturn=false;
+            toReturn = false;
         }
 
         return toReturn;
@@ -92,25 +88,27 @@ public class LoginFragment extends Fragment {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = mUsername.getText().toString();
-                String password = mPassword.getText().toString();
-                if(isValidInput())
-                {
+                final String username = mUsername.getText().toString();
+                final String password = mPassword.getText().toString();
+                if (isValidInput()) {
+                    mListenerObject.onMessageReceived("hide-gui");
                     mConvoHelper.setCredentials(username, password);
                     mConvoHelper.login(new Callback<Response<LoginResponse>>() {
                         @Override
                         public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
                             if (response.body().getMessage().equals("OK!")) {
-                                ProfileActivity.USER_INFO=response.body().getData();
+                                ProfileActivity.USER_INFO = response.body().getData();
                                 mListenerObject.onMessageReceived("logged-in");
                             } else {
-                                Snackbar.make(mLayout,response.body().getMessage(),2000).show();
+                                mListenerObject.onMessageReceived("show-gui");
+                                Snackbar.make(mLayout, response.body().getMessage(), 2000).show();
                             }
+
                         }
 
                         @Override
                         public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
-
+                            mListenerObject.onMessageReceived("show-gui");
                         }
                     });
                 }

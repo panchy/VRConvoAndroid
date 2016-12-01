@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConvoClient {
 
-    private static String baseUrl = "http://vrconvo.onesoftwareguy.com/";
+    public static String baseUrl = "http://vrconvo.onesoftwareguy.com/";
     private static ConvoService service = null;
     private static Retrofit retrofit = null;
 
