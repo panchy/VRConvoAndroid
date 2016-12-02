@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import mehdi.sakout.fancybuttons.FancyButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import uk.co.ribot.easyadapter.EasyRecyclerAdapter;
@@ -42,6 +44,15 @@ public class ItemsFragment extends Fragment {
     RecyclerView mRecyclerviewCharacters;
     @BindView(R.id.recyclerview_rooms)
     RecyclerView mRecyclerviewRooms;
+    @BindView(R.id.characters_layout)
+    LinearLayout mCharactersLayout;
+    @BindView(R.id.rooms_layout)
+    LinearLayout mRoomsLayout;
+    @BindView(R.id.rooms_button)
+    FancyButton mButtonRooms;
+    @BindView(R.id.characters_button)
+    FancyButton mButtonCharacters;
+
 
     private FragmentListener mListenerObject;
 
@@ -71,6 +82,7 @@ public class ItemsFragment extends Fragment {
         View v = inflater.inflate(LayoutId, container, false);
         mConvoHelper = new ConvoHelper(ProfileActivity.USER_INFO.getUsername(), ProfileActivity.USER_INFO.getPassword());
         ButterKnife.bind(this, v);
+        initListeners();
         initAdapters();
         getData();
         return v;
@@ -136,6 +148,48 @@ public class ItemsFragment extends Fragment {
         });
     }
 
+    private void initListeners() {
+
+        mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.white));
+        mButtonCharacters.setTextColor(getResources().getColor(R.color.teal));
+        mButtonCharacters.setIconColor(getResources().getColor(R.color.teal));
+        mButtonRooms.setBackgroundColor(getResources().getColor(R.color.teal));
+        mButtonRooms.setTextColor(getResources().getColor(R.color.white));
+        mButtonRooms.setIconColor(getResources().getColor(R.color.white));
+
+        mButtonCharacters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRoomsLayout.setVisibility(View.GONE);
+                mCharactersLayout.setVisibility(View.VISIBLE);
+
+                mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.teal));
+                mButtonCharacters.setTextColor(getResources().getColor(R.color.white));
+                mButtonCharacters.setIconColor(getResources().getColor(R.color.white));
+                mButtonRooms.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonRooms.setTextColor(getResources().getColor(R.color.teal));
+                mButtonRooms.setIconColor(getResources().getColor(R.color.teal));
+
+            }
+        });
+
+        mButtonRooms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCharactersLayout.setVisibility(View.GONE);
+                mRoomsLayout.setVisibility(View.VISIBLE);
+
+                mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonCharacters.setTextColor(getResources().getColor(R.color.teal));
+                mButtonCharacters.setIconColor(getResources().getColor(R.color.teal));
+                mButtonRooms.setBackgroundColor(getResources().getColor(R.color.teal));
+                mButtonRooms.setTextColor(getResources().getColor(R.color.white));
+                mButtonRooms.setIconColor(getResources().getColor(R.color.white));
+
+
+            }
+        });
+    }
 
     @Override
     public void onAttach(Context context) {

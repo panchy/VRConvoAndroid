@@ -111,6 +111,9 @@ public class SettingsFragment extends Fragment {
                             if (response.body().getMessage().equals("OK!")) {
                                 ProfileActivity.USER_INFO = response.body().getData();
                                 Snackbar.make(mLayout, R.string.passhaschanged, 2000).show();
+                                mCurrentPassword.setText("");
+                                mPassword.setText("");
+                                mPasswordRepeat.setText("");
                             } else {
                                 Snackbar.make(mLayout, response.body().getMessage(), 2000).show();
                             }
