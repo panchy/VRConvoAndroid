@@ -1,10 +1,10 @@
 package com.keensense.vrconvo.network;
 
-import com.keensense.vrconvo.model.Character;
-import com.keensense.vrconvo.model.LoginResponse;
-import com.keensense.vrconvo.model.Response;
-import com.keensense.vrconvo.model.Room;
-import com.keensense.vrconvo.model.UserInfo;
+import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.models.Response;
+import com.keensense.vrconvo.models.Room;
+import com.keensense.vrconvo.models.UserInfo;
 
 import java.util.List;
 
@@ -51,5 +51,8 @@ public interface ConvoService {
     @POST("service")
     Call<Response<LoginResponse>> changePassword(@Field("action") String action,@Field("username") String username,@Field("password") String password,@Field("new_password") String newPassword);
 
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<LoginResponse>> unlockContent(@Field("action") String action,@Field("content_type") String ContentType,@Field("content_id") int ContentId,@Field("username") String username,@Field("password") String password);
 
 }

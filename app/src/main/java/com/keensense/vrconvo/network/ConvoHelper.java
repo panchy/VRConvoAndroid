@@ -3,11 +3,11 @@ package com.keensense.vrconvo.network;
 import android.util.Log;
 
 import com.keensense.vrconvo.App;
-import com.keensense.vrconvo.model.Character;
-import com.keensense.vrconvo.model.LoginResponse;
-import com.keensense.vrconvo.model.Response;
-import com.keensense.vrconvo.model.Room;
-import com.keensense.vrconvo.model.UserInfo;
+import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.models.Response;
+import com.keensense.vrconvo.models.Room;
+import com.keensense.vrconvo.models.UserInfo;
 
 import java.util.List;
 
@@ -246,6 +246,33 @@ public class ConvoHelper {
     public void changePassword(String newPassword,final Callback<Response<LoginResponse>> customCallback) {
 
         ConvoClient.getRetrofitInstance().changePassword("change_password", username, password,newPassword).enqueue(new Callback<Response<LoginResponse>>() {
+            @Override
+            public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+
+    }
+
+    public void unlockContent(String contentType,int contentId,final Callback<Response<LoginResponse>> customCallback) {
+
+        ConvoClient.getRetrofitInstance().unlockContent("unlock_content",contentType,contentId, username, password).enqueue(new Callback<Response<LoginResponse>>() {
             @Override
             public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
                 if (customCallback != null) {

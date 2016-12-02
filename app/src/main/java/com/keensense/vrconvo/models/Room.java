@@ -1,4 +1,4 @@
-package com.keensense.vrconvo.model;
+package com.keensense.vrconvo.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -46,6 +46,17 @@ public class Room
 
     public void setRoom_name(String room_name) {
         this.room_name = room_name;
+    }
+
+    @SerializedName("cost")
+    private int cost;
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
 

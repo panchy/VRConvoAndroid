@@ -15,11 +15,11 @@ import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.apps.profile.adapter.CharacterViewHolder;
 import com.keensense.vrconvo.apps.profile.adapter.RoomViewHolder;
 import com.keensense.vrconvo.listeners.FragmentListener;
-import com.keensense.vrconvo.model.Character;
-import com.keensense.vrconvo.model.Response;
-import com.keensense.vrconvo.model.Room;
-import com.keensense.vrconvo.model.UnlockedCharacter;
-import com.keensense.vrconvo.model.UnlockedRoom;
+import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.Response;
+import com.keensense.vrconvo.models.Room;
+import com.keensense.vrconvo.models.UnlockedCharacter;
+import com.keensense.vrconvo.models.UnlockedRoom;
 import com.keensense.vrconvo.network.ConvoHelper;
 
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import uk.co.ribot.easyadapter.EasyRecyclerAdapter;
-import uk.co.ribot.easyadapter.ItemViewHolder;
 
 
 /**

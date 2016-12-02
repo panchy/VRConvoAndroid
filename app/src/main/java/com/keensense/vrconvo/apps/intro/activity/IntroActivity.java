@@ -1,14 +1,12 @@
 package com.keensense.vrconvo.apps.intro.activity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -18,8 +16,8 @@ import com.keensense.vrconvo.apps.intro.fragment.LoginFragment;
 import com.keensense.vrconvo.apps.intro.fragment.RegisterFragment;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
-import com.keensense.vrconvo.model.LoginResponse;
-import com.keensense.vrconvo.model.Response;
+import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.network.ConvoHelper;
 import com.keensense.vrconvo.utils.FragmentUtils;
 import com.keensense.vrconvo.utils.PermissionUtils;

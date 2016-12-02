@@ -1,4 +1,4 @@
-package com.keensense.vrconvo.model;
+package com.keensense.vrconvo.models;
 
 import com.google.gson.annotations.SerializedName;
 

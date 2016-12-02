@@ -1,6 +1,5 @@
 package com.keensense.vrconvo.apps.profile.activity;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,10 +12,14 @@ import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.fragment.HomeFragment;
 import com.keensense.vrconvo.apps.profile.fragment.ItemsFragment;
 import com.keensense.vrconvo.apps.profile.fragment.SettingsFragment;
+import com.keensense.vrconvo.events.UserInfoChangedEvent;
 import com.keensense.vrconvo.listeners.FragmentListener;
-import com.keensense.vrconvo.model.LoginResponse;
+import com.keensense.vrconvo.models.LoginResponse;
 import com.keensense.vrconvo.utils.FragmentUtils;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +58,30 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
         mFutils = new FragmentUtils(this);
         FragmentUtils.fragmentToAdd = HomeFragment.newInstance();
         mFutils.setFragment(R.id.container,true);
+        if (USER_INFO != null) {
+            mUsername.setText(USER_INFO.getUsername());
+            mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().get(0).getCoins()));
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        if(EventBus.getDefault().isRegistered(this))
+        EventBus.getDefault().unregister(this);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!EventBus.getDefault().isRegistered(this))
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe
+    public void onUserInfoChangedEvent(UserInfoChangedEvent event)
+    {
         if (USER_INFO != null) {
             mUsername.setText(USER_INFO.getUsername());
             mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().get(0).getCoins()));
@@ -118,7 +145,6 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
             showGUI(false);
         }
     }
-
 
     private void showGUI(boolean shouldShow) {
         if (shouldShow) {

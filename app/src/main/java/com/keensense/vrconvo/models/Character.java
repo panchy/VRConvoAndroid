@@ -1,4 +1,4 @@
-package com.keensense.vrconvo.model;
+package com.keensense.vrconvo.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -47,6 +47,16 @@ public class Character
         isLocked = locked;
     }
 
+    @SerializedName("cost")
+    private int cost;
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 
     @Override
     public boolean equals(Object o){

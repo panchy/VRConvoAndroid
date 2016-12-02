@@ -18,9 +18,9 @@ import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.intro.activity.IntroActivity;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
-import com.keensense.vrconvo.model.LoginResponse;
-import com.keensense.vrconvo.model.Response;
-import com.keensense.vrconvo.model.UserInfo;
+import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.models.Response;
+import com.keensense.vrconvo.models.UserInfo;
 import com.keensense.vrconvo.network.ConvoHelper;
 
 import butterknife.BindView;

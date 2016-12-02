@@ -1,7 +1,6 @@
 package com.keensense.vrconvo.apps.profile.fragment;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -14,17 +13,13 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 
-import com.keensense.vrconvo.App;
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
-import com.keensense.vrconvo.model.LoginResponse;
-import com.keensense.vrconvo.model.Response;
+import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.network.ConvoHelper;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
