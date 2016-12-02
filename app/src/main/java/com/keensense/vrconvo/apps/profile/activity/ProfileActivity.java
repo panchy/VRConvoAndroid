@@ -1,5 +1,6 @@
 package com.keensense.vrconvo.apps.profile.activity;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.fragment.HomeFragment;
 import com.keensense.vrconvo.apps.profile.fragment.ItemsFragment;
 import com.keensense.vrconvo.apps.profile.fragment.SettingsFragment;
+import com.keensense.vrconvo.events.SnackbarRequestEvent;
 import com.keensense.vrconvo.events.UserInfoChangedEvent;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.models.LoginResponse;
@@ -86,6 +88,12 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
             mUsername.setText(USER_INFO.getUsername());
             mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().get(0).getCoins()));
         }
+    }
+
+    @Subscribe
+    public void onSnackbarReqestReceived(SnackbarRequestEvent event)
+    {
+        Snackbar.make(mLayout,event.getText(),2000).show();
     }
 
     private void initBottomNav() {

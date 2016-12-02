@@ -3,6 +3,7 @@ package com.keensense.vrconvo.apps.profile.adapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
+import com.keensense.vrconvo.events.SnackbarRequestEvent;
 import com.keensense.vrconvo.events.UserInfoChangedEvent;
 import com.keensense.vrconvo.models.Character;
 import com.keensense.vrconvo.models.LoginResponse;
@@ -47,6 +49,8 @@ public class CharacterViewHolder extends ItemViewHolder<Character> {
     FancyButton button;
 
 
+
+
     //Extend ItemViewHolder and call super(view)
     public CharacterViewHolder(View view) {
         super(view);
@@ -57,7 +61,8 @@ public class CharacterViewHolder extends ItemViewHolder<Character> {
     public void onSetValues(final Character character, PositionInfo positionInfo) {
         //Log.e("RoomViewHolder",ConvoClient.baseUrl + "gameimages/"+room.getImage());
         Glide.with(getContext()).load(ConvoClient.baseUrl + ConvoClient.imagesFolder + "/" + character.getImage()).into(imageView);
-        textViewName.setVisibility(View.GONE);
+        textViewName.setText("( "+String.valueOf(character.getCost())+" CC"+" )");
+
         if (character.isLocked()) {
             button.setText("UNLOCK");
             button.setIconResource("\uf023");
@@ -78,18 +83,22 @@ public class CharacterViewHolder extends ItemViewHolder<Character> {
                                         button.setOnClickListener(null);
                                         EventBus.getDefault().post(new UserInfoChangedEvent(response.body().getData().getUserInfo().get(0)));
                                     }
+                                    else
+                                    {
+                                        EventBus.getDefault().post(new SnackbarRequestEvent(response.body().getMessage()));
+                                    }
                                 }
 
                                 @Override
                                 public void onFailure(Call<Response<LoginResponse>> call, Throwable t) {
-
+                                    EventBus.getDefault().post(new SnackbarRequestEvent("An error occurred."));
                                 }
                             });
 
                         }
                     };
                     AlertDialog dialog = new AlertDialog.Builder(getContext())
-                            .setMessage("Are you sure about unlocking this content?")
+                            .setMessage(Html.fromHtml("Are you sure about unlocking this content for <b>"+ String.valueOf(character.getCost()) +"</b> Convo Coins ?"))
                             .setPositiveButton("Yes", onclick)
                             .setNegativeButton("No", null)
                             .create();
@@ -98,6 +107,7 @@ public class CharacterViewHolder extends ItemViewHolder<Character> {
                 }
             });
         } else {
+
             button.setText("OWNED");
             button.setIconResource("\uf13e");
             button.setOnClickListener(null);
