@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="8dp"
+    tools:context=".apps.profile.fragment.ItemsFragment">
+
+
+    <LinearLayout
+        android:id="@+id/friends_layout"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_heightPercent="90%">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/friends"
+            android:textStyle="bold|italic" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_friends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/requests_layout"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_heightPercent="90%">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/requests"
+            android:textStyle="bold|italic" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_requests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/friends_button"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="49%"
+        fancy:fb_borderColor="@color/teal"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/white"
+        fancy:fb_focusColor="@color/colorPrimaryDark"
+        fancy:fb_fontIconResource="&#xf0c0;"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Friends"
+        fancy:fb_textColor="@color/teal" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/requests_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="49%"
+        fancy:fb_borderColor="@color/teal"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/white"
+        fancy:fb_focusColor="@color/colorPrimaryDark"
+        fancy:fb_fontIconResource="&#xf234;"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Requests"
+        fancy:fb_textColor="@color/teal" />
+
+</android.support.percent.PercentRelativeLayout>

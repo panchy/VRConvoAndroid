@@ -1,9 +1,7 @@
 package com.keensense.vrconvo.rawclasses;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.intro.fragment.LoginFragment;

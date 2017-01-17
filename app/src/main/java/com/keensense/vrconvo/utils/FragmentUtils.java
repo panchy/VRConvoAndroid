@@ -3,7 +3,6 @@ package com.keensense.vrconvo.utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 /**
  * Created by Panch on 29.11.2016.

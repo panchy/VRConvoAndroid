@@ -31,12 +31,12 @@ public class LoginResponse {
 
     public void setUnlockedRooms(ArrayList<UnlockedRoom> UnlockedRooms) { this.UnlockedRooms = UnlockedRooms; }
 
-    @SerializedName("UserInfo")
-    private ArrayList<UserInfo> UserInfo;
+    @SerializedName("UserInfos")
+    private UserInfo UserInfos;
 
-    public ArrayList<UserInfo> getUserInfo() { return this.UserInfo; }
+    public UserInfo getUserInfo() { return this.UserInfos; }
 
-    public void setUserInfo(ArrayList<UserInfo> UserInfo) { this.UserInfo = UserInfo; }
+    public void setUserInfo(UserInfo mUserInfo) { this.UserInfos = mUserInfo; }
 
     @SerializedName("id")
     private int id;

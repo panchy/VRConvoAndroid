@@ -82,7 +82,7 @@ public class RoomViewHolder extends ItemViewHolder<Room> {
                                         button.setIconResource("\uf13e");
                                         button.setOnClickListener(null);
 
-                                        EventBus.getDefault().post(new UserInfoChangedEvent(response.body().getData().getUserInfo().get(0)));
+                                        EventBus.getDefault().post(new UserInfoChangedEvent(response.body().getData().getUserInfo()));
                                     }
                                     else
                                     {

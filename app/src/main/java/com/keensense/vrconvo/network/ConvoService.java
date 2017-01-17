@@ -1,6 +1,7 @@
 package com.keensense.vrconvo.network;
 
 import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.Friendship;
 import com.keensense.vrconvo.models.LoginResponse;
 import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.models.Room;
@@ -54,5 +55,18 @@ public interface ConvoService {
     @FormUrlEncoded
     @POST("service")
     Call<Response<LoginResponse>> unlockContent(@Field("action") String action,@Field("content_type") String ContentType,@Field("content_id") int ContentId,@Field("username") String username,@Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<List<Friendship>>> getFriendships(@Field("action") String action, @Field("username") String username, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response> updateFriendRequest(@Field("action") String action, @Field("username") String username, @Field("password") String password,@Field("request_id") String request_id,@Field("accept") int accept);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response> updateStatus(@Field("action") String action, @Field("username") String username, @Field("password") String password,@Field("status") String status,@Field("room") String room);
+
 
 }

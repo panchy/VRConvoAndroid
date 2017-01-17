@@ -1,8 +1,8 @@
 package com.keensense.vrconvo.apps.profile.activity;
 
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.keensense.vrconvo.R;
+import com.keensense.vrconvo.apps.profile.fragment.FriendsFragment;
 import com.keensense.vrconvo.apps.profile.fragment.HomeFragment;
 import com.keensense.vrconvo.apps.profile.fragment.ItemsFragment;
 import com.keensense.vrconvo.apps.profile.fragment.SettingsFragment;
@@ -62,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
         mFutils.setFragment(R.id.container,true);
         if (USER_INFO != null) {
             mUsername.setText(USER_INFO.getUsername());
-            mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().get(0).getCoins()));
+            mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().getCoins()));
         }
 
     }
@@ -86,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
     {
         if (USER_INFO != null) {
             mUsername.setText(USER_INFO.getUsername());
-            mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().get(0).getCoins()));
+            mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().getCoins()));
         }
     }
 
@@ -98,9 +99,11 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
 
     private void initBottomNav() {
         AHBottomNavigationItem homeNav = new AHBottomNavigationItem("Home", R.drawable.ic_home_black_18dp, R.color.colorPrimaryDark);
+        AHBottomNavigationItem friendsNav = new AHBottomNavigationItem("Friends", R.drawable.ic_supervisor_account_black_18dp, R.color.colorPrimaryDark);
         AHBottomNavigationItem itemsNav = new AHBottomNavigationItem("Items", R.drawable.ic_shopping_cart_black_18dp, R.color.colorPrimaryDark);
         AHBottomNavigationItem settingsNav = new AHBottomNavigationItem("Settings", R.drawable.ic_settings_black_18dp, R.color.colorPrimaryDark);
         mBottomNav.addItem(homeNav);
+        mBottomNav.addItem(friendsNav);
         mBottomNav.addItem(itemsNav);
         mBottomNav.addItem(settingsNav);
         mBottomNav.setDefaultBackgroundColor(getResources().getColor(R.color.white));
@@ -121,9 +124,12 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
                         FragmentUtils.fragmentToAdd = HomeFragment.newInstance();
                         break;
                     case 1:
-                        FragmentUtils.fragmentToAdd = ItemsFragment.newInstance();
+                        FragmentUtils.fragmentToAdd = FriendsFragment.newInstance();
                         break;
                     case 2:
+                        FragmentUtils.fragmentToAdd = ItemsFragment.newInstance();
+                        break;
+                    case 3:
                         FragmentUtils.fragmentToAdd = SettingsFragment.newInstance();
                         break;
                 }

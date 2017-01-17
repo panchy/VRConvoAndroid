@@ -16,4 +16,6 @@
     <string name="please_wait_a_bit">Please wait a bit...</string>
     <string name="passhaschanged">Password has changed.</string>
     <string name="deviceisnotrelatedanymore">Device is not related to this account anymore.</string>
+    <string name="friends">Friends</string>
+    <string name="requests">Friend Requests</string>
 </resources>

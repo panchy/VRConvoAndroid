@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.keensense.vrconvo.App;
 import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.Friendship;
 import com.keensense.vrconvo.models.LoginResponse;
 import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.models.Room;
@@ -296,4 +297,30 @@ public class ConvoHelper {
         });
 
     }
+
+    public void getFriendships(final Callback<Response<List<Friendship>>> customCallback) {
+        ConvoClient.getRetrofitInstance().getFriendships("get_friendships",username,password).enqueue(new Callback<Response<List<Friendship>>>() {
+            @Override
+            public void onResponse(Call<Response<List<Friendship>>> call, retrofit2.Response<Response<List<Friendship>>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<Friendship>>> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+    }
+
 }
