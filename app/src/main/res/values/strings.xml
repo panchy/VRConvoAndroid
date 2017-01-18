@@ -18,4 +18,7 @@
     <string name="deviceisnotrelatedanymore">Device is not related to this account anymore.</string>
     <string name="friends">Friends</string>
     <string name="requests">Friend Requests</string>
+    <string name="last_activity">Last activity</string>
+    <string name="last_seen">Last seen</string>
+    <string name="user">User</string>
 </resources>

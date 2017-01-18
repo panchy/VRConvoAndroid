@@ -1,6 +1,15 @@
 package com.keensense.vrconvo.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Panch on 30.11.2016.
@@ -53,7 +62,43 @@ public class UserInfo {
     }
 
     public String getLast_active() {
-        return last_active;
+        String toReturn = "";
+            Log.e("asd",last_active);
+        if (last_active.contains("1900-01-01")) {
+
+            return "Never";
+
+        }
+        try {
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+            Date d = sdf.parse(last_active);
+            Date now = new Date(System.currentTimeMillis());
+            long diff = now.getTime() - d.getTime();
+            long diffSeconds = diff / 1000 % 60;
+            long diffMinutes = diff / (60 * 1000) % 60;
+            long diffHours = diff / (60 * 60 * 1000) % 24;
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+            Log.e("asd", String.valueOf(diffDays) + "|" + String.valueOf(diffHours) + "|" + String.valueOf(diffMinutes) + "|" + String.valueOf(diffSeconds) + "|");
+            c.setTime(d);
+            if (diffDays > 0) {
+                toReturn = String.valueOf(diffDays) + " days ago.";
+            } else {
+                if (diffHours > 0) {
+                    toReturn = String.valueOf(diffHours) + " hours, " + String.valueOf(diffMinutes) + " minutes ago.";
+                } else {
+                    if (diffMinutes > 3) {
+                        toReturn = String.valueOf(diffMinutes) + " minutes ago.";
+                    } else {
+                        toReturn = "Online";
+                    }
+                }
+            }
+        } catch (ParseException d) {
+            Log.e("asd", "Parse exception" + d.getMessage());
+        }
+
+        return toReturn;
     }
 
     public void setLast_active(String last_active) {
@@ -61,6 +106,9 @@ public class UserInfo {
     }
 
     public String getCurrent_status() {
+        if (current_status == null) {
+            current_status = "Registered.";
+        }
         return current_status;
     }
 

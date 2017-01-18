@@ -323,4 +323,56 @@ public class ConvoHelper {
         });
     }
 
+    public void updateStatus(String status,final Callback<Response> customCallback) {
+        ConvoClient.getRetrofitInstance().updateStatus("update_status",username,password,status,"{}").enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+
+    }
+
+    public void updateFriendRequest(int request_id,int accept,final Callback<Response> customCallback) {
+        ConvoClient.getRetrofitInstance().updateFriendRequest("update_friendrequest",username,password,request_id,accept).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+
+    }
+
 }

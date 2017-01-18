@@ -17,12 +17,16 @@ import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.apps.profile.adapter.CharacterViewHolder;
 import com.keensense.vrconvo.apps.profile.adapter.FriendViewHolder;
 import com.keensense.vrconvo.apps.profile.adapter.RoomViewHolder;
+import com.keensense.vrconvo.events.FriendsUpdatedEvent;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.models.Character;
 import com.keensense.vrconvo.models.Friendship;
 import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.models.Room;
 import com.keensense.vrconvo.network.ConvoHelper;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,8 @@ import mehdi.sakout.fancybuttons.FancyButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import uk.co.ribot.easyadapter.EasyRecyclerAdapter;
+
+import static com.keensense.vrconvo.apps.profile.activity.ProfileActivity.mConvoHelper;
 
 
 /**
@@ -60,8 +66,6 @@ public class FriendsFragment extends Fragment {
     private static List<Friendship> mFriends = new ArrayList<>();
     private static List<Friendship> mRequests = new ArrayList<>();
 
-    private ConvoHelper mConvoHelper = null;
-
     public FriendsFragment() {
         // Required empty public constructor
     }
@@ -81,7 +85,6 @@ public class FriendsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(LayoutId, container, false);
         ButterKnife.bind(this, v);
-        mConvoHelper = new ConvoHelper(ProfileActivity.USER_INFO.getUsername(), ProfileActivity.USER_INFO.getPassword());
         initListeners();
         initAdapters();
         getData();
@@ -105,8 +108,6 @@ public class FriendsFragment extends Fragment {
         mConvoHelper.getFriendships(new Callback<Response<List<Friendship>>>() {
             @Override
             public void onResponse(Call<Response<List<Friendship>>> call, retrofit2.Response<Response<List<Friendship>>> response) {
-                Log.e("executed",".");
-                Log.e("first Data",String.valueOf(response.body().getData().size()));
                 for (Friendship fr : response.body().getData()) {
                     if (fr.getStatus() == 1) {
                         mFriends.add(fr);
@@ -115,21 +116,21 @@ public class FriendsFragment extends Fragment {
                     }
                 }
                 Log.e("Final Data",String.valueOf(mFriends.size())+String.valueOf(mRequests.size()));
-                mRecyclerviewFriends.getAdapter().notifyDataSetChanged();
-                mRecyclerviewRequests.getAdapter().notifyDataSetChanged();
-                mListenerObject.onMessageReceived("show-gui");
-            }
+                        mRecyclerviewFriends.getAdapter().notifyDataSetChanged();
+                        mRecyclerviewRequests.getAdapter().notifyDataSetChanged();
+                        mListenerObject.onMessageReceived("show-gui");
+                        }
 
-            @Override
-            public void onFailure(Call<Response<List<Friendship>>> call, Throwable t) {
-                Log.e("executed",t.getMessage());
-                mListenerObject.onMessageReceived("show-gui");
-            }
+@Override
+public void onFailure(Call<Response<List<Friendship>>> call, Throwable t) {
+        Log.e("executed",t.getMessage());
+        mListenerObject.onMessageReceived("show-gui");
+        }
         });
 
-    }
+        }
 
-    private void initListeners() {
+private void initListeners() {
 
         mButtonRequests.setBackgroundColor(getResources().getColor(R.color.white));
         mButtonRequests.setTextColor(getResources().getColor(R.color.teal));
@@ -139,50 +140,64 @@ public class FriendsFragment extends Fragment {
         mButtonFriends.setIconColor(getResources().getColor(R.color.white));
 
         mButtonFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mRequestsLayout.setVisibility(View.GONE);
-                mFriendsLayout.setVisibility(View.VISIBLE);
+@Override
+public void onClick(View view) {
+        mRequestsLayout.setVisibility(View.GONE);
+        mFriendsLayout.setVisibility(View.VISIBLE);
 
-                mButtonRequests.setBackgroundColor(getResources().getColor(R.color.white));
-                mButtonRequests.setTextColor(getResources().getColor(R.color.teal));
-                mButtonRequests.setIconColor(getResources().getColor(R.color.teal));
-                mButtonFriends.setBackgroundColor(getResources().getColor(R.color.teal));
-                mButtonFriends.setTextColor(getResources().getColor(R.color.white));
-                mButtonFriends.setIconColor(getResources().getColor(R.color.white));
+        mButtonRequests.setBackgroundColor(getResources().getColor(R.color.white));
+        mButtonRequests.setTextColor(getResources().getColor(R.color.teal));
+        mButtonRequests.setIconColor(getResources().getColor(R.color.teal));
+        mButtonFriends.setBackgroundColor(getResources().getColor(R.color.teal));
+        mButtonFriends.setTextColor(getResources().getColor(R.color.white));
+        mButtonFriends.setIconColor(getResources().getColor(R.color.white));
 
-            }
+        }
         });
 
         mButtonRequests.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mFriendsLayout.setVisibility(View.GONE);
-                mRequestsLayout.setVisibility(View.VISIBLE);
+@Override
+public void onClick(View view) {
+        mFriendsLayout.setVisibility(View.GONE);
+        mRequestsLayout.setVisibility(View.VISIBLE);
 
-                mButtonFriends.setBackgroundColor(getResources().getColor(R.color.white));
-                mButtonFriends.setTextColor(getResources().getColor(R.color.teal));
-                mButtonFriends.setIconColor(getResources().getColor(R.color.teal));
-                mButtonRequests.setBackgroundColor(getResources().getColor(R.color.teal));
-                mButtonRequests.setTextColor(getResources().getColor(R.color.white));
-                mButtonRequests.setIconColor(getResources().getColor(R.color.white));
+        mButtonFriends.setBackgroundColor(getResources().getColor(R.color.white));
+        mButtonFriends.setTextColor(getResources().getColor(R.color.teal));
+        mButtonFriends.setIconColor(getResources().getColor(R.color.teal));
+        mButtonRequests.setBackgroundColor(getResources().getColor(R.color.teal));
+        mButtonRequests.setTextColor(getResources().getColor(R.color.white));
+        mButtonRequests.setIconColor(getResources().getColor(R.color.white));
 
 
-            }
+        }
         });
-    }
+        }
 
-    @Override
-    public void onAttach(Context context) {
+@Subscribe
+public void onFriendsDataChangedEvent(FriendsUpdatedEvent event)
+        {
+        getData();
+        }
+
+@Override
+public void onAttach(Context context) {
         super.onAttach(context);
         mListenerObject = (ProfileActivity) context;
         mListenerObject.onFragmentAttached();
-    }
+        if(!EventBus.getDefault().isRegistered(this))
+        {
+        EventBus.getDefault().register(this);
+        }
+        }
 
-    @Override
-    public void onDetach() {
+@Override
+public void onDetach() {
         mListenerObject.onFragmentDetached();
         mListenerObject = null;
+        if(EventBus.getDefault().isRegistered(this))
+        {
+        EventBus.getDefault().unregister(this);
+        }
         super.onDetach();
-    }
-}
+        }
+        }

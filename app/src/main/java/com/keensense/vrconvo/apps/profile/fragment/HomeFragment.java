@@ -11,8 +11,14 @@ import android.view.ViewGroup;
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.listeners.FragmentListener;
+import com.keensense.vrconvo.models.Response;
+import com.keensense.vrconvo.network.ConvoHelper;
 
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+
+import static com.keensense.vrconvo.apps.profile.activity.ProfileActivity.mConvoHelper;
 
 
 /**
@@ -42,6 +48,18 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(LayoutId, container, false);
         ButterKnife.bind(this,v);
+
+        mConvoHelper.updateStatus("In Android Application", new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+
+            }
+        });
         return  v;
     }
 

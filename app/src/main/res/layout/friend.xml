@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="wrap_content"
@@ -10,46 +12,115 @@
     android:padding="0dp">
 
     <LinearLayout
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal" />
 
-        <TextView
-            android:id="@+id/userinfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/lastactive"
-            android:layout_width="match_parent"
+            <TextView
+                android:layout_marginEnd="8dp"
+                android:text="@string/user"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/username"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold|italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/last_seen"
+                android:text="@string/last_activity"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/userinfo"
+                android:textColor="@android:color/holo_purple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal" />
+            >
+
+            <TextView
+                android:layout_marginEnd="8dp"
+                android:id="@+id/wasactive"
+                android:text="@string/last_seen"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/lastactive"
+                android:textColor="@android:color/holo_blue_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
+
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:visibility="gone"
             android:id="@+id/buttonCancel"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            app:layout_widthPercent="100%"
+            app:layout_heightPercent="100%"
+            android:layout_centerInParent="true"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -58,7 +129,7 @@
             fancy:fb_borderWidth="1dp"
             fancy:fb_defaultColor="@color/white"
             fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_fontIconResource="&#xf023;"
+            fancy:fb_fontIconResource="&#xf00d;"
             fancy:fb_iconPosition="left"
             fancy:fb_radius="0dp"
             fancy:fb_text="Cancel Request"
@@ -68,8 +139,9 @@
         <mehdi.sakout.fancybuttons.FancyButton
             android:visibility="gone"
             android:id="@+id/buttonAccept"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            app:layout_widthPercent="49.9%"
+            app:layout_heightPercent="100%"
+            android:layout_alignParentEnd="true"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -78,17 +150,18 @@
             fancy:fb_borderWidth="1dp"
             fancy:fb_defaultColor="@color/white"
             fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_fontIconResource="&#xf023;"
+            fancy:fb_fontIconResource="&#xf067;"
             fancy:fb_iconPosition="left"
             fancy:fb_radius="0dp"
             fancy:fb_text="Accept"
-            fancy:fb_textColor="@color/black" />
+            fancy:fb_textColor="@android:color/holo_green_light" />
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:visibility="gone"
             android:id="@+id/buttonRefuse"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            app:layout_widthPercent="49.9%"
+            app:layout_heightPercent="100%"
+            android:layout_alignParentStart="true"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -97,17 +170,17 @@
             fancy:fb_borderWidth="1dp"
             fancy:fb_defaultColor="@color/white"
             fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_fontIconResource="&#xf023;"
+            fancy:fb_fontIconResource="&#xf060;"
             fancy:fb_iconPosition="left"
             fancy:fb_radius="0dp"
             fancy:fb_text="Refuse"
-            fancy:fb_textColor="@color/black" />
+            fancy:fb_textColor="@android:color/holo_red_dark" />
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:visibility="gone"
             android:id="@+id/buttonRemove"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            app:layout_widthPercent="100%"
+            app:layout_heightPercent="100%"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -116,13 +189,13 @@
             fancy:fb_borderWidth="1dp"
             fancy:fb_defaultColor="@color/white"
             fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_fontIconResource="&#xf023;"
+            fancy:fb_fontIconResource="&#xf014;"
             fancy:fb_iconPosition="left"
             fancy:fb_radius="0dp"
             fancy:fb_text="Remove Friend"
-            fancy:fb_textColor="@color/black" />
+            fancy:fb_textColor="@android:color/holo_red_dark" />
+    </android.support.percent.PercentRelativeLayout>
 
-    </LinearLayout>
 
 
 

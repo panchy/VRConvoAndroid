@@ -140,7 +140,6 @@ public class IntroActivity extends AppCompatActivity implements FragmentListener
 
     }
 
-
     @Override
     public void onMessageReceived(String... messages) {
         if (messages[0].equals("logged-in")) {

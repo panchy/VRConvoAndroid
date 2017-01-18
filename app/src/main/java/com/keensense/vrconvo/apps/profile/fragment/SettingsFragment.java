@@ -27,6 +27,8 @@ import mehdi.sakout.fancybuttons.FancyButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+import static com.keensense.vrconvo.apps.profile.activity.ProfileActivity.mConvoHelper;
+
 
 /**
  * A simple fragment class with listener included. Created by Panch.
@@ -54,7 +56,6 @@ public class SettingsFragment extends Fragment {
     @BindView(R.id.layout)
     PercentRelativeLayout mLayout;
 
-    private ConvoHelper mConvoHelper = null;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -75,7 +76,6 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(LayoutId, container, false);
         ButterKnife.bind(this, v);
-        mConvoHelper = new ConvoHelper(ProfileActivity.USER_INFO.getUsername(), ProfileActivity.USER_INFO.getPassword());
         initListeners();
         init();
         return v;

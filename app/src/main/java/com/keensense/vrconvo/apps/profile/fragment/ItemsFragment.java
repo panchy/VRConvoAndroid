@@ -33,6 +33,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import uk.co.ribot.easyadapter.EasyRecyclerAdapter;
 
+import static com.keensense.vrconvo.apps.profile.activity.ProfileActivity.mConvoHelper;
+
 
 /**
  * A simple fragment class with listener included. Created by Panch.
@@ -59,7 +61,6 @@ public class ItemsFragment extends Fragment {
     private static List<Room> mRooms = new ArrayList<>();
     private static List<Character> mCharacters = new ArrayList<>();
 
-    private ConvoHelper mConvoHelper = null;
 
 
     public ItemsFragment() {
@@ -80,7 +81,7 @@ public class ItemsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(LayoutId, container, false);
-        mConvoHelper = new ConvoHelper(ProfileActivity.USER_INFO.getUsername(), ProfileActivity.USER_INFO.getPassword());
+
         ButterKnife.bind(this, v);
         initListeners();
         initAdapters();

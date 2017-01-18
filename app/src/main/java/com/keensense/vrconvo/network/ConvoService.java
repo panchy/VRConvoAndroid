@@ -62,7 +62,7 @@ public interface ConvoService {
 
     @FormUrlEncoded
     @POST("service")
-    Call<Response> updateFriendRequest(@Field("action") String action, @Field("username") String username, @Field("password") String password,@Field("request_id") String request_id,@Field("accept") int accept);
+    Call<Response> updateFriendRequest(@Field("action") String action, @Field("username") String username, @Field("password") String password,@Field("request_id") int request_id,@Field("accept") int accept);
 
     @FormUrlEncoded
     @POST("service")

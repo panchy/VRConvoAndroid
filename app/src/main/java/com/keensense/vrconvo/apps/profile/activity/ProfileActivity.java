@@ -18,6 +18,7 @@ import com.keensense.vrconvo.events.SnackbarRequestEvent;
 import com.keensense.vrconvo.events.UserInfoChangedEvent;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.network.ConvoHelper;
 import com.keensense.vrconvo.utils.FragmentUtils;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -50,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
     FrameLayout mLoadingLayout;
 
     public static LoginResponse USER_INFO = null;
+    public static ConvoHelper mConvoHelper = null;
     FragmentUtils mFutils;
 
     @Override
@@ -61,9 +63,11 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
         mFutils = new FragmentUtils(this);
         FragmentUtils.fragmentToAdd = HomeFragment.newInstance();
         mFutils.setFragment(R.id.container,true);
+        mConvoHelper = new ConvoHelper();
         if (USER_INFO != null) {
             mUsername.setText(USER_INFO.getUsername());
             mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().getCoins()));
+            mConvoHelper.setCredentials(USER_INFO.getUsername(),USER_INFO.getPassword());
         }
 
     }
@@ -92,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
     }
 
     @Subscribe
-    public void onSnackbarReqestReceived(SnackbarRequestEvent event)
+    public void onSnackbarRequestReceived(SnackbarRequestEvent event)
     {
         Snackbar.make(mLayout,event.getText(),2000).show();
     }
