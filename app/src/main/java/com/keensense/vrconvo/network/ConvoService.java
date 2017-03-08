@@ -5,6 +5,7 @@ import com.keensense.vrconvo.models.Friendship;
 import com.keensense.vrconvo.models.LoginResponse;
 import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.models.Room;
+import com.keensense.vrconvo.models.User;
 import com.keensense.vrconvo.models.UserInfo;
 
 import java.util.List;
@@ -66,7 +67,20 @@ public interface ConvoService {
 
     @FormUrlEncoded
     @POST("service")
+    Call<Response> sendFriendRequest(@Field("action") String action, @Field("to") String query,@Field("username") String username,@Field("password") String password);
+
+
+    @FormUrlEncoded
+    @POST("service")
     Call<Response> updateStatus(@Field("action") String action, @Field("username") String username, @Field("password") String password,@Field("status") String status,@Field("room") String room);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<List<User>>> searchUsers(@Field("action") String action, @Field("q") String query,@Field("username") String username,@Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response> checkFriendship(@Field("action") String action, @Field("to") String query,@Field("username") String username,@Field("password") String password);
 
 
 }

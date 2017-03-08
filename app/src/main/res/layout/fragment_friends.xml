@@ -11,30 +11,76 @@
     tools:context=".apps.profile.fragment.ItemsFragment">
 
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/friends_layout"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
         app:layout_heightPercent="90%">
 
-        <TextView
+
+        <LinearLayout
+            android:id="@+id/friendsdata_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/friends"
-            android:textStyle="bold|italic" />
+            android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_friends"
-            android:layout_width="match_parent"
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@string/friends"
+                android:textStyle="bold|italic" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textview_nofriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/you_don_t_have_any_friends_nyou_can_search_for_a_friend_from_the_search_bar_above"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_search"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_search_white_24dp"
+            app:elevation="7dp"
+            app:fabSize="normal"
+            app:theme="@style/Theme.AppCompat.Light"
+            app:useCompatPadding="true" />
+
+        <com.arlib.floatingsearchview.FloatingSearchView
+            android:id="@+id/floating_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:floatingSearch_close_search_on_keyboard_dismiss="true"
+            app:floatingSearch_leftActionMode="showSearch"
+            app:floatingSearch_searchBarMarginLeft="8dp"
+            app:floatingSearch_searchBarMarginRight="8dp"
+            app:floatingSearch_searchBarMarginTop="8dp"
+            app:floatingSearch_searchHint="Search..."
+            app:floatingSearch_showSearchKey="true"
+            app:floatingSearch_suggestionsListAnimDuration="250" />
 
 
-    </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/requests_layout"
@@ -51,6 +97,16 @@
             android:gravity="center_horizontal"
             android:text="@string/requests"
             android:textStyle="bold|italic" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textview_nofriendreqs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/there_are_currently_no_friend_requests_sent_or_received"
+            android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_requests"
