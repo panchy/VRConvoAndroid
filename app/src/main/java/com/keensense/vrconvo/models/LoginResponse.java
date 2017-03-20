@@ -27,6 +27,17 @@ public class LoginResponse {
     @SerializedName("UnlockedRooms")
     private ArrayList<UnlockedRoom> UnlockedRooms;
 
+    @SerializedName("UnlockedCustomAssetBundles")
+    private ArrayList<UnlockedCustomAssetBundle> UnlockedCustomAssetBundles;
+
+    public ArrayList<UnlockedCustomAssetBundle> getUnlockedCustomAssetBundles() {
+        return UnlockedCustomAssetBundles;
+    }
+
+    public void setUnlockedCustomAssetBundles(ArrayList<UnlockedCustomAssetBundle> unlockedCustomAssetBundles) {
+        UnlockedCustomAssetBundles = unlockedCustomAssetBundles;
+    }
+
     public ArrayList<UnlockedRoom> getUnlockedRooms() { return this.UnlockedRooms; }
 
     public void setUnlockedRooms(ArrayList<UnlockedRoom> UnlockedRooms) { this.UnlockedRooms = UnlockedRooms; }

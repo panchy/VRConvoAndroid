@@ -1,6 +1,7 @@
 package com.keensense.vrconvo.network;
 
 import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.CustomAssetBundle;
 import com.keensense.vrconvo.models.Friendship;
 import com.keensense.vrconvo.models.LoginResponse;
 import com.keensense.vrconvo.models.Response;
@@ -48,6 +49,11 @@ public interface ConvoService {
     @FormUrlEncoded
     @POST("service")
     Call<Response<List<Room>>> getAllRooms(@Field("action") String action);
+
+    @FormUrlEncoded
+    @POST("service")
+    Call<Response<List<CustomAssetBundle>>> getAllCustomAssetBundles(@Field("action") String action);
+
 
     @FormUrlEncoded
     @POST("service")

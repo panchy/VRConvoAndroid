@@ -14,12 +14,15 @@ import android.widget.LinearLayout;
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
 import com.keensense.vrconvo.apps.profile.adapter.CharacterViewHolder;
+import com.keensense.vrconvo.apps.profile.adapter.CustomAssetBundleViewHolder;
 import com.keensense.vrconvo.apps.profile.adapter.RoomViewHolder;
 import com.keensense.vrconvo.listeners.FragmentListener;
 import com.keensense.vrconvo.models.Character;
+import com.keensense.vrconvo.models.CustomAssetBundle;
 import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.models.Room;
 import com.keensense.vrconvo.models.UnlockedCharacter;
+import com.keensense.vrconvo.models.UnlockedCustomAssetBundle;
 import com.keensense.vrconvo.models.UnlockedRoom;
 import com.keensense.vrconvo.network.ConvoHelper;
 
@@ -46,6 +49,8 @@ public class ItemsFragment extends Fragment {
     RecyclerView mRecyclerviewCharacters;
     @BindView(R.id.recyclerview_rooms)
     RecyclerView mRecyclerviewRooms;
+    @BindView(R.id.recyclerview_customassetbundles)
+    RecyclerView mRecyclerviewCustomAssetBundles;
     @BindView(R.id.characters_layout)
     LinearLayout mCharactersLayout;
     @BindView(R.id.rooms_layout)
@@ -54,13 +59,16 @@ public class ItemsFragment extends Fragment {
     FancyButton mButtonRooms;
     @BindView(R.id.characters_button)
     FancyButton mButtonCharacters;
-
+    @BindView(R.id.customassetbundles_button)
+    FancyButton mButtonCustomAssetBundles;
+    @BindView(R.id.customassetbundles_layout)
+    LinearLayout mCustomAssetBundlesLayout;
 
     private FragmentListener mListenerObject;
 
     private static List<Room> mRooms = new ArrayList<>();
     private static List<Character> mCharacters = new ArrayList<>();
-
+    private static List<CustomAssetBundle> mCustomAssetBundles = new ArrayList<>();
 
 
     public ItemsFragment() {
@@ -96,12 +104,16 @@ public class ItemsFragment extends Fragment {
         mRecyclerviewCharacters.setAdapter(new EasyRecyclerAdapter<Character>(getActivity(), CharacterViewHolder.class, mCharacters));
         GridLayoutManager GLM2 = new GridLayoutManager(getActivity(), 2);
         mRecyclerviewCharacters.setLayoutManager(GLM2);
+        mRecyclerviewCustomAssetBundles.setAdapter(new EasyRecyclerAdapter<Character>(getActivity(), CustomAssetBundleViewHolder.class, mCustomAssetBundles));
+        GridLayoutManager GLM3 = new GridLayoutManager(getActivity(), 2);
+        mRecyclerviewCustomAssetBundles.setLayoutManager(GLM3);
     }
 
     private void getData() {
         mListenerObject.onMessageReceived("hide-gui");
         mCharacters.clear();
         mRooms.clear();
+        mCustomAssetBundles.clear();
         for (UnlockedRoom room : ProfileActivity.USER_INFO.getUnlockedRooms()) {
             room.getRoom().setLocked(false);
             mRooms.add(room.getRoom());
@@ -110,7 +122,12 @@ public class ItemsFragment extends Fragment {
             character.getCharacter().setLocked(false);
             mCharacters.add(character.getCharacter());
         }
+        for (UnlockedCustomAssetBundle cab : ProfileActivity.USER_INFO.getUnlockedCustomAssetBundles()) {
 
+            cab.getCustomAssetBundle().setLocked(false);
+            mCustomAssetBundles.add(cab.getCustomAssetBundle());
+
+        }
         mConvoHelper.getAllRooms(new Callback<Response<List<Room>>>() {
             @Override
             public void onResponse(Call<Response<List<Room>>> call, retrofit2.Response<Response<List<Room>>> response) {
@@ -139,11 +156,31 @@ public class ItemsFragment extends Fragment {
                     }
                 }
                 mRecyclerviewCharacters.getAdapter().notifyDataSetChanged();
-                mListenerObject.onMessageReceived("show-gui");
+
             }
 
             @Override
             public void onFailure(Call<Response<List<Character>>> call, Throwable t) {
+
+            }
+        });
+
+        mConvoHelper.getAllCustomAssetBundles(new Callback<Response<List<CustomAssetBundle>>>() {
+            @Override
+            public void onResponse(Call<Response<List<CustomAssetBundle>>> call, retrofit2.Response<Response<List<CustomAssetBundle>>> response) {
+                for (CustomAssetBundle cab : response.body().getData()) {
+                    if (!mCustomAssetBundles.contains(cab)) {
+                        cab.setLocked(true);
+                        mCustomAssetBundles.add(cab);
+                    }
+
+                }
+                mRecyclerviewCustomAssetBundles.getAdapter().notifyDataSetChanged();
+                mListenerObject.onMessageReceived("show-gui");
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<CustomAssetBundle>>> call, Throwable t) {
                 mListenerObject.onMessageReceived("show-gui");
             }
         });
@@ -158,18 +195,28 @@ public class ItemsFragment extends Fragment {
         mButtonRooms.setTextColor(getResources().getColor(R.color.white));
         mButtonRooms.setIconColor(getResources().getColor(R.color.white));
 
+        mButtonCustomAssetBundles.setBackgroundColor(getResources().getColor(R.color.white));
+        mButtonCustomAssetBundles.setTextColor(getResources().getColor(R.color.teal));
+        mButtonCustomAssetBundles.setIconColor(getResources().getColor(R.color.teal));
+
         mButtonCharacters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mRoomsLayout.setVisibility(View.GONE);
                 mCharactersLayout.setVisibility(View.VISIBLE);
+                mCustomAssetBundlesLayout.setVisibility(View.GONE);
 
                 mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.teal));
                 mButtonCharacters.setTextColor(getResources().getColor(R.color.white));
                 mButtonCharacters.setIconColor(getResources().getColor(R.color.white));
-                mButtonRooms.setBackgroundColor(getResources().getColor(R.color.white));
-                mButtonRooms.setTextColor(getResources().getColor(R.color.teal));
-                mButtonRooms.setIconColor(getResources().getColor(R.color.teal));
+
+                mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonCharacters.setTextColor(getResources().getColor(R.color.teal));
+                mButtonCharacters.setIconColor(getResources().getColor(R.color.teal));
+
+                mButtonCustomAssetBundles.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonCustomAssetBundles.setTextColor(getResources().getColor(R.color.teal));
+                mButtonCustomAssetBundles.setIconColor(getResources().getColor(R.color.teal));
 
             }
         });
@@ -179,14 +226,44 @@ public class ItemsFragment extends Fragment {
             public void onClick(View view) {
                 mCharactersLayout.setVisibility(View.GONE);
                 mRoomsLayout.setVisibility(View.VISIBLE);
+                mCustomAssetBundlesLayout.setVisibility(View.GONE);
 
                 mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.white));
                 mButtonCharacters.setTextColor(getResources().getColor(R.color.teal));
                 mButtonCharacters.setIconColor(getResources().getColor(R.color.teal));
+
+                mButtonCustomAssetBundles.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonCustomAssetBundles.setTextColor(getResources().getColor(R.color.teal));
+                mButtonCustomAssetBundles.setIconColor(getResources().getColor(R.color.teal));
+
                 mButtonRooms.setBackgroundColor(getResources().getColor(R.color.teal));
                 mButtonRooms.setTextColor(getResources().getColor(R.color.white));
                 mButtonRooms.setIconColor(getResources().getColor(R.color.white));
 
+
+            }
+        });
+
+
+        mButtonCustomAssetBundles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mCharactersLayout.setVisibility(View.GONE);
+                mRoomsLayout.setVisibility(View.GONE);
+                mCustomAssetBundlesLayout.setVisibility(View.VISIBLE);
+
+                mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonCharacters.setTextColor(getResources().getColor(R.color.teal));
+                mButtonCharacters.setIconColor(getResources().getColor(R.color.teal));
+
+                mButtonCustomAssetBundles.setBackgroundColor(getResources().getColor(R.color.teal));
+                mButtonCustomAssetBundles.setTextColor(getResources().getColor(R.color.white));
+                mButtonCustomAssetBundles.setIconColor(getResources().getColor(R.color.white));
+
+                mButtonRooms.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonRooms.setTextColor(getResources().getColor(R.color.teal));
+                mButtonRooms.setIconColor(getResources().getColor(R.color.teal));
 
             }
         });

@@ -23,4 +23,5 @@
     <string name="user">User</string>
     <string name="you_don_t_have_any_friends_nyou_can_search_for_a_friend_from_the_search_bar_above">You don\'t have any friends. You can search for a friend from the search button below.</string>
     <string name="there_are_currently_no_friend_requests_sent_or_received">There are currently no friend requests sent or received.</string>
+    <string name="customassetbundles">Custom Asset Bundles</string>
 </resources>

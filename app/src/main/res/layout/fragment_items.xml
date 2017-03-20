@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_heightPercent="90%">
+        app:layout_heightPercent="78%">
 
         <TextView
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_heightPercent="90%">
+        app:layout_heightPercent="78%">
 
         <TextView
             android:layout_width="match_parent"
@@ -60,6 +60,50 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/customassetbundles_layout"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_heightPercent="78%">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/customassetbundles"
+            android:textStyle="bold|italic" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_customassetbundles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/customassetbundles_button"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%"
+        app:layout_marginBottomPercent="11%"
+        fancy:fb_borderColor="@color/teal"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/white"
+        fancy:fb_focusColor="@color/colorPrimaryDark"
+        fancy:fb_fontIconResource="&#xf19c;"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Custom Asset Bundles"
+        fancy:fb_textColor="@color/teal" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/rooms_button"
