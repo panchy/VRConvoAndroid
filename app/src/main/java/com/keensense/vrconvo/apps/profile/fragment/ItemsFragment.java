@@ -24,7 +24,6 @@ import com.keensense.vrconvo.models.Room;
 import com.keensense.vrconvo.models.UnlockedCharacter;
 import com.keensense.vrconvo.models.UnlockedCustomAssetBundle;
 import com.keensense.vrconvo.models.UnlockedRoom;
-import com.keensense.vrconvo.network.ConvoHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +103,7 @@ public class ItemsFragment extends Fragment {
         mRecyclerviewCharacters.setAdapter(new EasyRecyclerAdapter<Character>(getActivity(), CharacterViewHolder.class, mCharacters));
         GridLayoutManager GLM2 = new GridLayoutManager(getActivity(), 2);
         mRecyclerviewCharacters.setLayoutManager(GLM2);
-        mRecyclerviewCustomAssetBundles.setAdapter(new EasyRecyclerAdapter<Character>(getActivity(), CustomAssetBundleViewHolder.class, mCustomAssetBundles));
+        mRecyclerviewCustomAssetBundles.setAdapter(new EasyRecyclerAdapter<CustomAssetBundle>(getActivity(), CustomAssetBundleViewHolder.class, mCustomAssetBundles));
         GridLayoutManager GLM3 = new GridLayoutManager(getActivity(), 2);
         mRecyclerviewCustomAssetBundles.setLayoutManager(GLM3);
     }
@@ -122,6 +121,7 @@ public class ItemsFragment extends Fragment {
             character.getCharacter().setLocked(false);
             mCharacters.add(character.getCharacter());
         }
+
         for (UnlockedCustomAssetBundle cab : ProfileActivity.USER_INFO.getUnlockedCustomAssetBundles()) {
 
             cab.getCustomAssetBundle().setLocked(false);

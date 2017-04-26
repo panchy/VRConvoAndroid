@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class UnlockedCustomAssetBundle {
 
-    @SerializedName("CustomAssetBundle")
+    @SerializedName("CustomAssetBundles")
     private CustomAssetBundle CustomAssetBundle;
     @SerializedName("Id")
     private int id;
