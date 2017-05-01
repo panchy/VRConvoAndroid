@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_feed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
+        android:id="@+id/infoText"
         android:text="This page will have information about your events \n that you have done in VR Convo.\nIncluding your friends' feed."
         android:layout_width="match_parent"
         android:layout_height="match_parent"

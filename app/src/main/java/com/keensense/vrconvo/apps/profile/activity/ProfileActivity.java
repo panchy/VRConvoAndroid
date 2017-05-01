@@ -17,7 +17,9 @@ import com.keensense.vrconvo.apps.profile.fragment.SettingsFragment;
 import com.keensense.vrconvo.events.SnackbarRequestEvent;
 import com.keensense.vrconvo.events.UserInfoChangedEvent;
 import com.keensense.vrconvo.listeners.FragmentListener;
+import com.keensense.vrconvo.models.Feed;
 import com.keensense.vrconvo.models.LoginResponse;
+import com.keensense.vrconvo.models.Response;
 import com.keensense.vrconvo.network.ConvoHelper;
 import com.keensense.vrconvo.utils.FragmentUtils;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -25,8 +27,12 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class ProfileActivity extends AppCompatActivity implements FragmentListener {
     private int LayoutId = R.layout.activity_profile;
@@ -69,6 +75,8 @@ public class ProfileActivity extends AppCompatActivity implements FragmentListen
             mConvoCoins.setText(String.valueOf(USER_INFO.getUserInfo().getCoins()));
             mConvoHelper.setCredentials(USER_INFO.getUsername(),USER_INFO.getPassword());
         }
+
+
 
     }
 

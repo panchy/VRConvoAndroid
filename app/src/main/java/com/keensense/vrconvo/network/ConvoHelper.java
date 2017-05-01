@@ -5,6 +5,7 @@ import android.util.Log;
 import com.keensense.vrconvo.App;
 import com.keensense.vrconvo.models.Character;
 import com.keensense.vrconvo.models.CustomAssetBundle;
+import com.keensense.vrconvo.models.Feed;
 import com.keensense.vrconvo.models.Friendship;
 import com.keensense.vrconvo.models.LoginResponse;
 import com.keensense.vrconvo.models.Response;
@@ -467,6 +468,31 @@ public class ConvoHelper {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                if (customCallback != null) {
+                    customCallback.onFailure(call, t);
+                } else {
+                    Log.e(TAG, "Response was a failure.Also please implement a callback to this function.");
+                }
+            }
+        });
+    }
+
+    public void getFeeds(final Callback<Response<List<Feed>>> customCallback) {
+        ConvoClient.getRetrofitInstance().getFeeds("get_feeds", username, password).enqueue(new Callback<Response<List<Feed>>>() {
+            @Override
+            public void onResponse(Call<Response<List<Feed>>> call, retrofit2.Response<Response<List<Feed>>> response) {
+                if (customCallback != null) {
+                    if (response.body() != null)
+                        customCallback.onResponse(call, response);
+                    else
+                        Log.e(TAG, "Response ended with success. But no data was received.(Empty Body)");
+                } else {
+                    Log.e(TAG, "Response was a success.Also please implement a callback to this function.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<Feed>>> call, Throwable t) {
                 if (customCallback != null) {
                     customCallback.onFailure(call, t);
                 } else {
