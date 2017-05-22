@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.keensense.vrconvo.R;
 import com.keensense.vrconvo.apps.profile.activity.ProfileActivity;
@@ -54,7 +55,7 @@ public class SettingsFragment extends Fragment {
     TextInputEditText mPassword;
 
     @BindView(R.id.layout)
-    PercentRelativeLayout mLayout;
+    ScrollView mLayout;
 
 
     public SettingsFragment() {

@@ -94,21 +94,22 @@ public class HomeFragment extends Fragment {
 
     private void getData() {
 
+        if (mFeeds == null) {
+            mFeeds = new ArrayList<>();
+        }
+
         mFeeds.clear();
         mConvoHelper.getFeeds(new Callback<Response<List<Feed>>>() {
             @Override
             public void onResponse(Call<Response<List<Feed>>> call, retrofit2.Response<Response<List<Feed>>> response) {
 
                 mFeeds = response.body().getData();
-                if(mFeeds!=null && mFeeds.size()>0)
-                {
+                if (mFeeds != null && mFeeds.size() > 0) {
                     mFeedRecyclerView.setVisibility(View.VISIBLE);
                     mInfoText.setVisibility(View.GONE);
-                    Collections.sort(mFeeds,feedComparator);
+                    Collections.sort(mFeeds, feedComparator);
                     initRecyclerView();
-                }
-                else
-                {
+                } else {
                     mFeedRecyclerView.setVisibility(View.GONE);
                     mInfoText.setVisibility(View.VISIBLE);
                     mInfoText.setText(response.body().getMessage());

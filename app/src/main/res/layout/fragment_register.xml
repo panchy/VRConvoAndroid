@@ -13,7 +13,7 @@
         android:id="@+id/vrconvo_logo"
         android:layout_centerHorizontal="true"
         android:src="@drawable/storybegins"
-        app:layout_heightPercent="40%"
+        app:layout_heightPercent="30%"
         app:layout_widthPercent="60%" />
 
 
@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
-        app:layout_heightPercent="60%"
+        app:layout_heightPercent="70%"
         app:layout_widthPercent="80%">
 
         <LinearLayout
@@ -89,26 +89,28 @@
                 fancy:fb_text="SIGN UP"
                 fancy:fb_textColor="@color/black" />
 
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/button_back"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                fancy:fb_borderColor="@color/black"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimaryDark"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="10dp"
+                fancy:fb_text="Back"
+                fancy:fb_textColor="@color/colorPrimaryDark" />
+
         </LinearLayout>
 
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/button_back"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="32dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            fancy:fb_borderColor="@color/black"
-            fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="@color/colorPrimary"
-            fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_iconPosition="left"
-            fancy:fb_radius="10dp"
-            fancy:fb_text="Back"
-            fancy:fb_textColor="@color/colorPrimaryDark" />
 
     </FrameLayout>
 

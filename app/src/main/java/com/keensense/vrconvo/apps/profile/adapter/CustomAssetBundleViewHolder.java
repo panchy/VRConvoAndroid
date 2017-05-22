@@ -87,7 +87,7 @@ public class CustomAssetBundleViewHolder extends ItemViewHolder<CustomAssetBundl
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             ConvoHelper mConvoHelper = new ConvoHelper(ProfileActivity.USER_INFO.getUsername(), ProfileActivity.USER_INFO.getPassword());
-                            mConvoHelper.unlockContent("character", character.getId(), new Callback<Response<LoginResponse>>() {
+                            mConvoHelper.unlockContent("customassetbundle", character.getId(), new Callback<Response<LoginResponse>>() {
                                 @Override
                                 public void onResponse(Call<Response<LoginResponse>> call, retrofit2.Response<Response<LoginResponse>> response) {
                                     if (response.body().getMessage().equals("OK!")) {

@@ -210,9 +210,9 @@ public class ItemsFragment extends Fragment {
                 mButtonCharacters.setTextColor(getResources().getColor(R.color.white));
                 mButtonCharacters.setIconColor(getResources().getColor(R.color.white));
 
-                mButtonCharacters.setBackgroundColor(getResources().getColor(R.color.white));
-                mButtonCharacters.setTextColor(getResources().getColor(R.color.teal));
-                mButtonCharacters.setIconColor(getResources().getColor(R.color.teal));
+                mButtonRooms.setBackgroundColor(getResources().getColor(R.color.white));
+                mButtonRooms.setTextColor(getResources().getColor(R.color.teal));
+                mButtonRooms.setIconColor(getResources().getColor(R.color.teal));
 
                 mButtonCustomAssetBundles.setBackgroundColor(getResources().getColor(R.color.white));
                 mButtonCustomAssetBundles.setTextColor(getResources().getColor(R.color.teal));

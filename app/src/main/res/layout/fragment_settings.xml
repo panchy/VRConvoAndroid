@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:layout_width="match_parent"
@@ -9,121 +8,126 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_heightPercent="70%">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="User Settings"
-            android:textStyle="bold|italic" />
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/edittext_currentpassword_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/currentpassword"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/edittext_password_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="New Password"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/edittext_psaswordrepeat_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/repeatnewpass"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
-
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/button_changepassword"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginTop="16dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            fancy:fb_borderColor="@color/black"
-            fancy:fb_borderWidth="1dp"
-            fancy:fb_defaultColor="@color/white"
-            fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_iconPosition="left"
-            fancy:fb_radius="10dp"
-            fancy:fb_text="Change Password"
-            fancy:fb_textColor="@color/colorPrimaryDark" />
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:padding="16dp"
-        app:layout_heightPercent="30%">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Allow this device to launch VR Convo with your account?"
+                android:text="User Settings"
                 android:textStyle="bold|italic" />
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edittext_currentpassword_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/currentpassword"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edittext_password_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="New Password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edittext_psaswordrepeat_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/repeatnewpass"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/button_unbind_device"
+                android:id="@+id/button_changepassword"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_gravity="center|center_horizontal"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="16dp"
                 android:paddingBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="10dp"
                 fancy:fb_borderColor="@color/black"
                 fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@android:color/holo_green_light"
+                fancy:fb_defaultColor="@color/white"
                 fancy:fb_focusColor="@color/colorPrimaryDark"
                 fancy:fb_iconPosition="left"
                 fancy:fb_radius="10dp"
-                fancy:fb_text="Allow"
-                fancy:fb_textColor="@color/white" />
+                fancy:fb_text="Change Password"
+                fancy:fb_textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp">
 
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Allow this device to launch VR Convo with your account?"
+                    android:textStyle="bold|italic" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/button_unbind_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|center_horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    fancy:fb_borderColor="@color/black"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@android:color/holo_green_light"
+                    fancy:fb_focusColor="@color/colorPrimaryDark"
+                    fancy:fb_iconPosition="left"
+                    fancy:fb_radius="10dp"
+                    fancy:fb_text="Allow"
+                    fancy:fb_textColor="@color/white" />
+
+            </LinearLayout>
 
 
+        </FrameLayout>
 
 
-</android.support.percent.PercentRelativeLayout>
+    </LinearLayout>
+</ScrollView>
+
